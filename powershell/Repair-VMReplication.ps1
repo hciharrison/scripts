@@ -1,6 +1,11 @@
 ﻿<#
 .Synopsis
    Connects to cluster nodes, checks VM replication state and resumes/repairs Replication if needed
+   Based on script from here: https://community.spiceworks.com/scripts/show/2565-repair-vmreplication
+   My changes:
+      Made it cluster aware to iterate through nodes in cluster(s)
+      Added logging and error checking
+      Changed the logic to suite my needs
 .DESCRIPTION
     Connects to nodes in a specified cluster(s), processes through each VM, and verifies Replication is working. If not 
     it will try to resume replication, then clear out the replication statistics and resume replication, then try a resync,
