@@ -89,7 +89,7 @@ Function Repair-VMReplication
         <#Set Cluster Names manually if needed
         If ($ClusterNames -eq $null)
         {
-        $ClusterNames  = "psp03-hvc01", "psp03-c02"
+        $ClusterNames  = "Cluster01", "Cluster02"
         
         }#End If
         #>
