@@ -269,14 +269,9 @@ Function Setup-VMReplication
                                                     WriteLog("Initial replication of $VMname complete, moving on to the next VM in 10 seconds")
                                                     Start-Sleep -s 10
                                                     #>
-    
-    
-           
+                  
                                                     #echo "All done, exiting!"
                             
-                            
-                            
-                    
                 
             }
         }#End PROCESS
