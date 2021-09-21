@@ -207,7 +207,7 @@ Function Setup-VMReplication
                                         Start-Sleep -s 5
 
                                         # Enable replication on VM
-                                        Enable-VMReplication -VMName $VMName -ComputerName $ClusterNode -AuthenticationType Kerberos -ReplicationFrequencySec $ReplicationFrequencySec -ReplicaServerName $DestHVBRName -ReplicaServerPort 80 
+                                        Enable-VMReplication -VMName $VMName -ComputerName $VMHost -AuthenticationType Kerberos -ReplicationFrequencySec $ReplicationFrequencySec -ReplicaServerName $DestHVBRName -ReplicaServerPort 80 
                                         CheckError "Enabled Hyper-V replica on $VMName" "Error enabling Hyper-V replica on $VMName"
                                         #WriteLog("Waiting 60 seconds to allow replication to settle")
                                         Start-Sleep -s 5
