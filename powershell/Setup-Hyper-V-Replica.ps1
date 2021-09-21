@@ -204,7 +204,7 @@ Function Setup-VMReplication
                                         Start-Sleep -s 5
                                         Invoke-Command -ComputerName $DestHVBRName -ScriptBlock { Set-VMReplicationAuthorizationEntry -AllowedPrimaryServer $using:SourceHVBRName -StorageLoc $using:NewPath }
                                         CheckError "Changed Hyper-V replica broker service path to $NewPath" "Error changing Hyper-V replica broker path"
-                                        Start-Sleep -s 10
+                                        Start-Sleep -s 5
 
                                         # Enable replication on VM
                                         Enable-VMReplication -VMName $VMName -ComputerName $ClusterNode -AuthenticationType Kerberos -ReplicationFrequencySec $ReplicationFrequencySec -ReplicaServerName $DestHVBRName -ReplicaServerPort 80 
