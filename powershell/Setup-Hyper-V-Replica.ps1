@@ -214,7 +214,7 @@ Function Setup-VMReplication
 
 
                                             # Fix up path to VHDs on replica destination to be in vmname folder rather than a GUID
-                                            $NewVMHost = Get-VM -ComputerName azshci-c1-h2 | ? { $_.Name -eq "test-rep-02" } | Get-VMReplication | select-object -expandproperty CurrentReplicaServerName
+                                            $NewVMHost = Get-VM -ComputerName $VMHost | ? { $_.Name -eq $VMName } | Get-VMReplication | select-object -expandproperty CurrentReplicaServerName
                                             $vmObject = Invoke-Command -ComputerName $NewVMHost -ScriptBlock { get-vm -name $using:VMName }
                                             $VHDs = Invoke-Command -ComputerName $NewVMHost -ScriptBlock { get-vm -name $using:VMName | Select-Object VMId | get-vhd }
                                             WriteLog($vmname + " replica destination is $NewVMHost")
