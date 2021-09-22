@@ -36,11 +36,24 @@
 #>
 
 #Setup error log file name
-$pathToLogs = "logs\hvr\"
+$pathToLogs = "logs\RepairHVReplica\"
 $datetimelogfile = get-date -format "ddMMyyyy-HHmmss"
-$2ndpartlogfilename = "_repair_replication_log_" +$datetimelogfile+ ".txt"
+$2ndpartlogfilename = "_repair_hvr_log_" +$datetimelogfile+ ".txt"
 #echo "Logfiles for setting up replication will be saved to $pathToLogs"
 $error.clear()
+
+#Check and create Logs Folder if needed
+$CheckLogPath = Test-Path -Path "$pathToLogs"
+If(!$CheckLogPath)
+    {
+    Write-Host "Logs Folder not found" -ForegroundColor Yellow
+    New-Item $pathToLogs -ItemType Directory | Out-Null
+    Write-Host "Logs Folder created at $pathToLogs" -ForegroundColor Yellow
+    }
+    Else
+    {
+    Write-Host "Logs Folder found at $pathToLogs" -ForegroundColor Green
+    }
 
 function WriteLog($message) 
     {
