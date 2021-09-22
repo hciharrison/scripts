@@ -274,8 +274,8 @@ Function Setup-VMReplication
                             
                 
             }
-        }#End PROCESS
-    }
+      }#End PROCESS
+      }
     }
         END
             {
@@ -293,6 +293,6 @@ Function Setup-VMReplication
 
             }#End END
             
-    }#End Function Repair-VMReplication
+   }#End Function
             
 Setup-VMReplication
