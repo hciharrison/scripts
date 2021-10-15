@@ -273,9 +273,10 @@ Function Setup-VMReplication
                                             
                 }
             
-    }
+            }
 
-    }
+        }
+
     }#End PROCESS
         
     END
