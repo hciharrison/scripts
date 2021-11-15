@@ -4,7 +4,7 @@
 #Manually run each section on each node in the cluster
 
 ## WORKFLOW ##
-#Ensure phsycail infrastrucutre / servers are powered and all Interfaces cabled correctly
+#Ensure physical infrastructure / servers are powered and all Interfaces cabled correctly
 #Download Latest GA ISO: https://azure.microsoft.com/en-us/products/azure-stack/hci/hci-download/
 #Access servers via console or remote access card and mount media via USB or virtual connect
 #Install OS on OS specific drive(s), e.g. BOSS Card (drives that won't be used by S2D)
