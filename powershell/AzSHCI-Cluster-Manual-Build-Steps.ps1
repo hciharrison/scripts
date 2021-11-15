@@ -25,7 +25,7 @@
 
 
 #Install hyper-v on nested azshci
-Install-WindowsFeature -Name Hyper-V, Hyper-V-Powershell, Failover-Clustering, Data-Center-Bridging, BitLocker, FS-FileServer, RSAT-Clustering-PowerShell, FS-SMBBW, Storage-Replica, FS-Data-Deduplication -IncludeAllSubFeature -IncludeManagementTools -verbose
+Install-WindowsFeature -Name Hyper-V, Failover-Clustering, FS-Data-Deduplication, BitLocker, Data-Center-Bridging, RSAT-AD-PowerShell, Storage-Replica, FS-SMBBW, -IncludeAllSubFeature -IncludeManagementTools –verbose
 
 
 #Rename Adapters
