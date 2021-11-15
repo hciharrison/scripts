@@ -149,11 +149,13 @@ Uninstall-WindowsFeature -Name FS-SMB1
 Enable-NetAdapterRdma -Name STORAGE*
 Get-NetAdapterRdma
 
-
 #Set Jumbo MTU
 $adapters = Get-NetAdapter
 Foreach($adapter in $adapters) { Set-NetAdapterAdvancedProperty -Name $adapter.name -RegistryKeyword “*JumboPacket” -Registryvalue 9014 }
 Get-NetAdapterAdvancedProperty -RegistryKeyword  *JumboPacket
+
+#Enable iWARP firewall rule (if iWARP is used)
+Enable-NetFirewallRule -Name "FPSSMBD-iWARP-In-TCP"
 
 
 #Ensure Remote Management is enabled or use sconfig to enable it
