@@ -48,7 +48,7 @@ Rename-NetAdapter -Name "Ethernet 4" -NewName "STORAGE-B"
 
 
 #Create SET Team
-New-VMSwitch -Name SETvSwitch-MGMT -NetAdapterName "MGMT-A","MGMT-B" -EnableEmbeddedTeaming $true
+New-VMSwitch -Name SETvSwitch-MGMT -NetAdapterName "MGMT-A","MGMT-B" -EnableEmbeddedTeaming $true -MinimumBandwidthMode Weight -Verbose
 #Rename the Management adapter
 Rename-VMNetworkAdapter -ManagementOS -Name SETvSwitch-MGMT -NewName Management
 
