@@ -168,7 +168,7 @@ Enable-NetFirewallRule -Name "FPSSMBD-iWARP-In-TCP"
 
 
 #Test cluster
-Test-Cluster -Node node01,node02 -Include “Storage Spaces Direct”,”Inventory”,”Network”,”System Configuration"
+Test-Cluster -Node node01,node02 -Include "Storage Spaces Direct","Inventory","Network","System Configuration"
 
 #Create cluster with static IP
 New-Cluster -Name azshci-cluster -Node node01,nod02 -NoStorage -StaticAddress "10.10.1.45"
