@@ -142,6 +142,10 @@ $interface = Get-NetAdapter | ? { $_.name -eq 'STORAGE-B' }
 #remove-NetIPAddress -InterfaceIndex $interface.ifIndex
 New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress "192.168.11.47" -PrefixLength 24
 
+#Disable regsiter dns on storage adapters
+$Interfaces = Get-NetAdapter | ? { $_.name -like 'STORAGE*' }
+foreach($Interface in $Interfaces) {
+Set-DNSClient -InterfaceIndex $Interface.IfIndex -RegisterThisConnectionsAddress $false }
 
 
 #Allow ICMP
