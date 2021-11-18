@@ -233,6 +233,8 @@ Get-ClusterResourceType -Name "Virtual Machine" | Set-ClusterParameter -Name Mig
 Enable-ClusterS2D
 
 
+#Update the hardware timeout for Spaceport - will require reboot of each node
+Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\spaceport \Parameters -Name HwTimeout -Value 0x00002710 -Verbose
 
 
 #Configuration for RoCE
