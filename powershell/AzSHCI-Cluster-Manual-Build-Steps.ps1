@@ -117,6 +117,8 @@ suser1p 20
 Add-Computer -DomainName $Domain -Credential $Account -Options JoinWithNewName,accountcreate -Restart
 
 
+#Ensure time is syncing with domnian / PDC emulator correctly
+
 
 #Add Storage IPs - change values for your deployment
 #Node01
