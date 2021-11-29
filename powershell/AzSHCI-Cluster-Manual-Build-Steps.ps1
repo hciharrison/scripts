@@ -239,6 +239,10 @@ Enable-ClusterS2D
 Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\spaceport \Parameters -Name HwTimeout -Value 0x00002710 -Verbose
 
 
+#For iWarp enable port 5445
+#Enable-NetFirewallRule FPSSMBD-iWARP-In-TCP
+
+
 #Configuration for RoCE
 #Configure the DCB settings
 #SMB always use Priority 3 as best practice
