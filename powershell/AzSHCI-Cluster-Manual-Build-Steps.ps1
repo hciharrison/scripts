@@ -105,7 +105,7 @@ $Hostname = "node01"
 $Domain = "lab01.local"
 $Account = "lab01\user1"
 Rename-Computer -NewName $Hostname
-suser1p 20
+Sleep 20
 Add-Computer -DomainName $Domain -Credential $Account -Options JoinWithNewName,accountcreate -Restart
 
 #Node02
@@ -113,7 +113,7 @@ $Hostname = "node02"
 $Domain = "lab01.local"
 $Account = "lab01\user1"
 Rename-Computer -NewName $Hostname
-suser1p 20
+Sleep 20
 Add-Computer -DomainName $Domain -Credential $Account -Options JoinWithNewName,accountcreate -Restart
 
 
@@ -127,7 +127,7 @@ w32tm /query /peers
 $interface = Get-NetAdapter | ? { $_.name -eq 'STORAGE-A' }
 #remove-NetIPAddress -InterfaceIndex $interface.ifIndex
 New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress "192.168.10.46" -PrefixLength 24
-Suser1p 3
+Sleep 3
 #Storage B
 $interface = Get-NetAdapter | ? { $_.name -eq 'STORAGE-B' }
 #remove-NetIPAddress -InterfaceIndex $interface.ifIndex
@@ -139,7 +139,7 @@ New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress "192.168.11.46" -
 $interface = Get-NetAdapter | ? { $_.name -eq 'STORAGE-A' }
 #remove-NetIPAddress -InterfaceIndex $interface.ifIndex
 New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress "192.168.10.47" -PrefixLength 24
-Suser1p 3
+Sleep 3
 #Storage B
 $interface = Get-NetAdapter | ? { $_.name -eq 'STORAGE-B' }
 #remove-NetIPAddress -InterfaceIndex $interface.ifIndex
