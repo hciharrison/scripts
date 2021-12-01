@@ -118,6 +118,7 @@ Add-Computer -DomainName $Domain -Credential $Account -Options JoinWithNewName,a
 
 
 #Ensure time is syncing with domnian / PDC emulator correctly
+w32tm /query /peers
 
 
 #Add Storage IPs - change values for your deployment
