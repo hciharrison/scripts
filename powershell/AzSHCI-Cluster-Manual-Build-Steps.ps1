@@ -111,13 +111,13 @@ Set-WinUserLanguageList -LanguageList en-gb -Force
 Set-WinSystemLocale -systemlocale en-gb
 
 #Set nice date format to your requirements
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sCountry -Value "Singapore";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sLongDate -Value "dddd, d. MMMM yyyy";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortDate -Value "dd/MM/yyyy";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortTime -Value "HH:mm";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sTimeFormat -Value "HH:mm:ss";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sYearMonth -Value "MMMM yyyy";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name iFirstDayOfWeek -Value 0;
+#Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sCountry -Value "United Kingdom";
+#Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sLongDate -Value "dd MMMM yyyy";
+#Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortDate -Value "dd/MM/yyyy";
+#Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortTime -Value "HH:mm";
+#Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sTimeFormat -Value "HH:mm:ss";
+#Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sYearMonth -Value "MMMM yyyy";
+#Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name iFirstDayOfWeek -Value 0;
 
 
 #Add Storage IPs - change values for your deployment
