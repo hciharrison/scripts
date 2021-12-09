@@ -243,7 +243,7 @@ Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\spaceport \Parame
 
 
 #For iWarp enable port 5445
-#Enable-NetFirewallRule FPSSMBD-iWARP-In-TCP
+Enable-NetFirewallRule FPSSMBD-iWARP-In-TCP
 
 
 #Configuration for RoCE
