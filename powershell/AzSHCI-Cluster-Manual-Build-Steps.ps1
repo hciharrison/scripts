@@ -1,7 +1,5 @@
-
 ## MANUAL BUILD STEPS ##
 ## Azure Stack HCI ##
-
 
 #Manually run each section on each node in the cluster unless cluster wide settings
 #Examples have been used in this document - change the values to reflect your solution
