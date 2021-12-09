@@ -54,6 +54,7 @@ Rename-NetAdapter -Name "Ethernet 4" -NewName "STORAGE-B"
 
 
 #Create SET Team - this example is to use same Team for Management and Compute
+#Consider enabling SR-IOV at this point if you need guest RDMA as you can't enable it in future
 New-VMSwitch -Name SETvSwitch-MGMTCOMP -NetAdapterName "MGMT-A","MGMT-B" -EnableEmbeddedTeaming $true -MinimumBandwidthMode Weight -Verbose
 #Rename the Management adapter
 Rename-VMNetworkAdapter -ManagementOS -Name SETvSwitch-MGMTCOMP -NewName Management
