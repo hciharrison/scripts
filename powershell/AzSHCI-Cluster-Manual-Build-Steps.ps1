@@ -1,20 +1,25 @@
 
-## BUILD STEPS ##
+## MANUAL BUILD STEPS ##
+## Azure Stack HCI ##
 
-#Manually run each section on each node in the cluster
+
+#Manually run each section on each node in the cluster unless cluster wide settings
+#Examples have been used in this document - change the values to reflect your solution
 
 ## WORKFLOW ##
 #Ensure physical infrastructure / servers are powered and all Interfaces cabled correctly
 #Download Latest GA ISO: https://azure.microsoft.com/en-us/products/azure-stack/hci/hci-download/
 #Access servers via console or remote access card and mount media via USB or virtual connect
 #Install OS on OS specific drive(s), e.g. BOSS Card (drives that won't be used by S2D)
-#Once OS isntalled:
+#Once OS installed:
+#Install Roles
 #Name Phsycial Adapters
 #Create SET Team for Mgmt, rename Mgmt Adapter
 #Set Mgmt IP Address
 #Enable RDP and log onto nodes remotely
-#Set time zone and regional settings
 #AD Join and set hostname
+#Ensure time is syncing with Domain correctly
+#Set time zone and regional settings
 #Configure Storage Adapter IPs
 #Uninstall SMB1
 #Enable RDMA on Storage Adapters
@@ -47,10 +52,11 @@ Rename-NetAdapter -Name "Ethernet 3" -NewName "STORAGE-A"
 Rename-NetAdapter -Name "Ethernet 4" -NewName "STORAGE-B"
 
 
-#Create SET Team
-New-VMSwitch -Name SETvSwitch-MGMT -NetAdapterName "MGMT-A","MGMT-B" -EnableEmbeddedTeaming $true -MinimumBandwidthMode Weight -Verbose
+#Create SET Team - this example is to use same Team for Management and Compute
+New-VMSwitch -Name SETvSwitch-MGMTCOMP -NetAdapterName "MGMT-A","MGMT-B" -EnableEmbeddedTeaming $true -MinimumBandwidthMode Weight -Verbose
 #Rename the Management adapter
-Rename-VMNetworkAdapter -ManagementOS -Name SETvSwitch-MGMT -NewName Management
+Rename-VMNetworkAdapter -ManagementOS -Name SETvSwitch-MGMTCOMP -NewName Management
+
 
 #Node01
 #Set Mgmt IP Address - change the values for your deployment
@@ -181,11 +187,10 @@ Enable-NetFirewallRule -Name "FPSSMBD-iWARP-In-TCP"
 #Patch OS ensuring you have the latest CU's installed
 
 
-
 #Test cluster
 Test-Cluster -Node node01,node02 -Include "Storage Spaces Direct","Inventory","Network","System Configuration"
 
-#Create cluster with static IP
+#Create cluster with static IP - ignore strorage IPs if switchless
 New-Cluster -Name azshci-cluster -Node node01,nod02 -NoStorage -StaticAddress "10.10.1.45"
 
 
