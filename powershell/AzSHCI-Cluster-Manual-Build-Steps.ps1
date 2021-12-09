@@ -83,22 +83,6 @@ Set-NetFirewallRule -DisplayGroup "Remote Desktop" -Enabled True
 Get-NetAdapter | ? { $_.Status -eq 'Disconnected' } | Disable-NetAdapter -confirm:$false
 
 
-#Set time zone and regional settings
-Set-TimeZone -Name "GMT Standard Time"
-Set-WinUserLanguageList -LanguageList en-gb -Force
-Set-WinSystemLocale -systemlocale en-gb
-
-#Set nice date format to your requirements
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sCountry -Value "Singapore";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sLongDate -Value "dddd, d. MMMM yyyy";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortDate -Value "dd/MM/yyyy";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortTime -Value "HH:mm";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sTimeFormat -Value "HH:mm:ss";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sYearMonth -Value "MMMM yyyy";
-Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name iFirstDayOfWeek -Value 0;
-
-
-
 #Domain Join Nodes
 #Node01
 $Hostname = "node01"
@@ -117,8 +101,23 @@ Sleep 20
 Add-Computer -DomainName $Domain -Credential $Account -Options JoinWithNewName,accountcreate -Restart
 
 
-#Ensure time is syncing with domnian / PDC emulator correctly
+#Ensure time is syncing with domain correctly
 w32tm /query /peers
+
+
+#Set time zone and regional settings
+Set-TimeZone -Name "GMT Standard Time"
+Set-WinUserLanguageList -LanguageList en-gb -Force
+Set-WinSystemLocale -systemlocale en-gb
+
+#Set nice date format to your requirements
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sCountry -Value "Singapore";
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sLongDate -Value "dddd, d. MMMM yyyy";
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortDate -Value "dd/MM/yyyy";
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sShortTime -Value "HH:mm";
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sTimeFormat -Value "HH:mm:ss";
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name sYearMonth -Value "MMMM yyyy";
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name iFirstDayOfWeek -Value 0;
 
 
 #Add Storage IPs - change values for your deployment
