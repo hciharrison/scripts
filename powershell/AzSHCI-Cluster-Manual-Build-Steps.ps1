@@ -243,7 +243,7 @@ Enable-ClusterS2D
 
 
 #Update the hardware timeout for Spaceport - will require reboot of each node
-Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\spaceport \Parameters -Name HwTimeout -Value 0x00002710 -Verbose
+Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\spaceport\Parameters -Name HwTimeout -Value 0x00002710 -Verbose
 
 
 #For iWarp enable port 5445
