@@ -158,6 +158,12 @@ foreach($Interface in $Interfaces) {
 Set-DNSClient -InterfaceIndex $Interface.IfIndex -RegisterThisConnectionsAddress $false }
 
 
+#Create SRLM Team if Stretched Cluster
+#Create SET Team
+New-VMSwitch -Name SETvSwitch-SRLM -NetAdapterName "SRLM-A","SRLM-B" -EnableEmbeddedTeaming $true ; Sleep 3 ; Rename-VMNetworkAdapter -ManagementOS -Name SETvSwitch-SRLM -NewName SR
+Add-VMNetworkAdapter -ManagementOS -SwitchName SETvSwitch-SRLM -Name LM
+
+
 #Allow ICMP
 #Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -Enabled True
 #Allow SMB-In
