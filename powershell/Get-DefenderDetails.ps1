@@ -1,6 +1,6 @@
 <#
   .SYNOPSIS
-  Gets AntiMalware details for servers in a cluster, i.e. defender
+  Gets Defender details for servers in a cluster, i.e. defender
 
   .DESCRIPTION
   This script is to get antimalware details for cluster nodes.
