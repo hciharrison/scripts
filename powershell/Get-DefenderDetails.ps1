@@ -23,9 +23,9 @@
 
   .EXAMPLE
   #First load function
-  C:\PS>. .\Get-MalwareDetails.ps1
-  C:\PS>Get-MalwareDetails -ClusterName cluster1 | Format-Table -AutoSize
-  C:\PS>Get-MalwareDetails -ClusterName cluster1, cluster2 | Format-Table -AutoSize
+  C:\PS>. .\Get-DefenderDetails.ps1
+  C:\PS>Get-DefenderDetails -ClusterName cluster1 | Format-Table -AutoSize
+  C:\PS>Get-DefenderDetails -ClusterName cluster1, cluster2 | Format-Table -AutoSize
 
   .NOTES
   Written by: Lee Harrison
@@ -33,7 +33,7 @@
   URL: https://hciharrison.com
 #>
 
-Function Get-MalwareDetails { #make a function out of the below code
+Function Get-DefenderDetails { #make a function out of the below code
 
     [CmdletBinding()]
     param(
