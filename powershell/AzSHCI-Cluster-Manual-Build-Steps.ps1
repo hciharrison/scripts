@@ -59,6 +59,9 @@ New-VMSwitch -Name SETvSwitch-MGMTCOMP -NetAdapterName "MGMT-A","MGMT-B" -Enable
 #Rename the Management adapter
 Rename-VMNetworkAdapter -ManagementOS -Name SETvSwitch-MGMTCOMP -NewName Management
 
+#Set the VLAN and Mode (if needed)
+Set-VMNetworkAdapterVlan -ManagementOS -Name Management -Access -VlanId 0
+
 
 #Node01
 #Set Mgmt IP Address - change the values for your deployment
