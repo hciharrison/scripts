@@ -258,6 +258,9 @@ Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\spaceport\Paramet
 #For iWarp enable port 5445
 Enable-NetFirewallRule FPSSMBD-iWARP-In-TCP
 
+#2-Node Nested Cache to tolerate cache drive failure if node is down
+Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.NestedResiliency.DisableWriteCacheOnNodeDown.Enabled" -Value "True"
+
 
 #Configuration for RoCE
 #Configure the DCB settings
