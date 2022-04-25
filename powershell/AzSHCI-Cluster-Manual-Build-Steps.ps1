@@ -181,6 +181,9 @@ Uninstall-WindowsFeature -Name FS-SMB1
 Enable-NetAdapterRdma -Name STORAGE*
 Get-NetAdapterRdma
 
+#Check MTU
+Get-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket"
+
 #Set Jumbo MTU
 $adapters = Get-NetAdapter
 Foreach($adapter in $adapters) { Set-NetAdapterAdvancedProperty -Name $adapter.name -RegistryKeyword “*JumboPacket” -Registryvalue 9014 }
