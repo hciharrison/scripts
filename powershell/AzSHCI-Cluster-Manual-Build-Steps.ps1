@@ -189,6 +189,8 @@ Get-NetAdapterAdvancedProperty -RegistryKeyword  *JumboPacket
 #Enable iWARP firewall rule (if iWARP is used)
 Enable-NetFirewallRule -Name "FPSSMBD-iWARP-In-TCP"
 
+#Check RDMA Mode is iWarp or RoCE
+Get-NetAdapterAdvancedProperty -Name STORAGE-* -DisplayName "Network*"
 
 #Ensure Remote Management is enabled or use sconfig to enable it
 
@@ -260,9 +262,6 @@ Enable-NetFirewallRule FPSSMBD-iWARP-In-TCP
 
 #2-Node Nested Cache to tolerate cache drive failure if node is down
 Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.NestedResiliency.DisableWriteCacheOnNodeDown.Enabled" -Value "True"
-
-#Check RDMA Mode is iWarp or RoCE
-Get-NetAdapterAdvancedProperty -name pSMB.1 -DisplayName "Network*"
 
 
 #Configuration for RoCE
