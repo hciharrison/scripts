@@ -181,6 +181,9 @@ Uninstall-WindowsFeature -Name FS-SMB1
 Enable-NetAdapterRdma -Name STORAGE*
 Get-NetAdapterRdma
 
+#Check MTU
+Get-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket"
+
 #Set Jumbo MTU
 $adapters = Get-NetAdapter
 Foreach($adapter in $adapters) { Set-NetAdapterAdvancedProperty -Name $adapter.name -RegistryKeyword “*JumboPacket” -Registryvalue 9014 }
@@ -189,6 +192,8 @@ Get-NetAdapterAdvancedProperty -RegistryKeyword  *JumboPacket
 #Enable iWARP firewall rule (if iWARP is used)
 Enable-NetFirewallRule -Name "FPSSMBD-iWARP-In-TCP"
 
+#Check RDMA Mode is iWarp or RoCE
+Get-NetAdapterAdvancedProperty -Name STORAGE-* -DisplayName "Network*"
 
 #Ensure Remote Management is enabled or use sconfig to enable it
 
@@ -246,6 +251,8 @@ Get-ClusterNetwork | sort Address | ft *
 #Set Live Migration Network(s)
 Get-ClusterResourceType -Name "Virtual Machine" | Set-ClusterParameter -Name MigrationExcludeNetworks -Value ([String]::Join(";",(Get-ClusterNetwork | Where-Object {$_.Name -notlike '*STORAGE*' }).ID))
 
+#Check LM Networks exlcuded
+Get-ClusterResourceType -Name "Virtual Machine" | get-ClusterParameter -Name MigrationExcludeNetworks
 
 #Enable storage spaces
 Enable-ClusterS2D
