@@ -251,6 +251,8 @@ Get-ClusterNetwork | sort Address | ft *
 #Set Live Migration Network(s)
 Get-ClusterResourceType -Name "Virtual Machine" | Set-ClusterParameter -Name MigrationExcludeNetworks -Value ([String]::Join(";",(Get-ClusterNetwork | Where-Object {$_.Name -notlike '*STORAGE*' }).ID))
 
+#Check LM Networks exlcuded
+Get-ClusterResourceType -Name "Virtual Machine" | get-ClusterParameter -Name MigrationExcludeNetworks
 
 #Enable storage spaces
 Enable-ClusterS2D
