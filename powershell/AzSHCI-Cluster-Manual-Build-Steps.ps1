@@ -227,6 +227,9 @@ Set-VMHost -MaximumVirtualMachineMigrations 2
 #Set Live Migration to SMB
 Set-VMHost -VirtualMachineMigrationPerformanceOption SMB
 
+#Disable SMB Signing
+#Set-SmbClientConfiguration -RequireSecuritySignature $false -EnableSecuritySignature $false 
+#Set-SmbServerConfiguration -RejectUnencryptedAccess $false -EnableSecuritySignature $false -RequireSecuritySignature $false
 
 
 #Cluster Networks
