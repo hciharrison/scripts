@@ -351,7 +351,7 @@ if($CheckRoleHV -eq $true)
     Enable-NetFirewallRule -Name "FPSSMBD-iWARP-In-TCP"
     CheckError("iWARP firewall rule enabled")
 
-    #4. Disable discomnected adapters
+    #4. Disable disconnected adapters
     WriteLog("Disabling disconnected Adapters")
     Get-NetAdapter | ? { $_.Status -eq 'Disconnected' } | Disable-NetAdapter -confirm:$false
     CheckError("Disconnected Adapters disabled")
