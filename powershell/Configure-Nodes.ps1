@@ -16,7 +16,7 @@
 
 ######## EDIT SECTION ########
 #### ONLY SET THESE VARIABLES AS PER YOUR DEPLOYMENT #####
-#region Script Paramters
+#region Script Parameters
 $pathToLogs = "Logs\nodeconfig\"
 $hostnames = "ashci-c6-h1","ashci-c6-h2"
 $SETAdapterNaming = "MGMT"
