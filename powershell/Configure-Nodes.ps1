@@ -2,15 +2,15 @@
 .Synopsis
    Configuration Script for HCI Nodes after OS Installation
 .DESCRIPTION
-    Run on each node after OS installation to configure them
-     
+    Run on each node after OS installation to configure them    
 .EXAMPLE
     PS C:\> .\Configure-Nodes.ps1
     Logs Folder found at Logs\nodeconfig\
     Logfiles for configuring nodes will be saved to Logs\nodeconfig\
 .NOTES
-    Edit the Parameters and IP Addreses in the EDIT SECTION for your deployment, copy Script to Nodes via the Remote Access Card, run Script  
-    Requires Hyper-V Role to be installed for SET Team creation, script will prompt to install and reboot server if needed (then script will need to be re-run)
+    Edit the Parameters and IP Addreses in the EDIT SECTION for your deployment, copy Script to Nodes via the Remote Access Card, run Script
+    The IPs section has examples of configuring switched and switchless nodes, comment / uncomment as needed
+    Requires Hyper-V Role to be installed for SET Team creation, script will prompt to install and reboot server if needed (then re-run script)
 #>
 
 
