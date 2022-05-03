@@ -353,7 +353,7 @@ if($CheckRoleHV -eq $true)
 
     #4. Disable disconnected adapters
     WriteLog("Disabling disconnected Adapters")
-    Get-NetAdapter | ? { $_.Status -eq 'Disconnected' } | Disable-NetAdapter -confirm:$false
+    Get-NetAdapter | Where-Object { $_.Status -eq 'Disconnected' } | Disable-NetAdapter -confirm:$false
     CheckError("Disconnected Adapters disabled")
 
     #5. Allow ICMP
