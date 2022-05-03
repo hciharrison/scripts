@@ -138,7 +138,7 @@ if($CheckRoleHV -eq $true)
 }else
   {
     Read-Host "Hyper-V Role is not installed, press enter to install it and reboot the Server, or stop the Script and install manually"
-    Install-WindowsFeature -Name Hyper-V -IncludeManagementTools
+    Install-WindowsFeature -Name Hyper-V -IncludeManagementTools -Restart
     CheckError("Hyper-V installed")
   }
 #endregion
