@@ -27,26 +27,18 @@ $Domain = "lab01.local"
 
 #region Set IPs
     ### SET NODE IP ADDRESSES ###
-
-    <# IF DIRECT CONNECT SWITCHLESS - 3-Node - 2 x Site
-    $nodeips = @{"ashci-c1-n1-MGMT" = "10.44.83.3";  "ashci-c1-n1-STORAGE-A" = "10.44.82.131"; "ashci-c1-n1-STORAGE-B" = "10.44.82.163"; "ashci-c1-n1-STORAGE-C" = "10.44.83.195"; "ashci-c1-n1-STORAGE-D" = "10.44.83.227";
-                "ashci-c1-n2-MGMT" = "10.44.83.4";  "ashci-c1-n2-STORAGE-A" = "10.44.82.132"; "ashci-c1-n2-STORAGE-B" = "10.44.82.164"; "ashci-c1-n2-STORAGE-C" = "10.44.83.196"; "ashci-c1-n2-STORAGE-D" = "10.44.83.228";
-                "ashci-c1-n3-MGMT" = "10.44.83.5";  "ashci-c1-n3-STORAGE-A" = "10.44.82.133"; "ashci-c1-n3-STORAGE-B" = "10.44.82.165"; "ashci-c1-n3-STORAGE-C" = "10.44.83.197"; "ashci-c1-n3-STORAGE-D" = "10.44.83.229";
-                "ashci-c2-n1-MGMT" = "10.44.83.9";  "ashci-c2-n1-STORAGE-A" = "10.44.82.137"; "ashci-c2-n1-STORAGE-B" = "10.44.82.169"; "ashci-c2-n1-STORAGE-C" = "10.44.83.201"; "ashci-c2-n1-STORAGE-D" = "10.44.83.233";
-                "ashci-c2-n2-MGMT" = "10.44.83.10"; "ashci-c2-n2-STORAGE-A" = "10.44.82.138"; "ashci-c2-n2-STORAGE-B" = "10.44.82.170"; "ashci-c2-n2-STORAGE-C" = "10.44.83.202"; "ashci-c2-n2-STORAGE-D" = "10.44.83.234";
-                "ashci-c2-n3-MGMT" = "10.44.83.11"; "ashci-c2-n3-STORAGE-A" = "10.44.82.139"; "ashci-c2-n3-STORAGE-B" = "10.44.82.171"; "ashci-c2-n3-STORAGE-C" = "10.44.83.203"; "ashci-c2-n3-STORAGE-D" = "10.44.83.235"
+    <# IF DIRECT CONNECT SWITCHLESS - 3-Node
+    $nodeips = @{"ashci-c1-n1-MGMT" = "10.10.1.3";  "ashci-c1-n1-STORAGE-A" = "192.168.10.3"; "ashci-c1-n1-STORAGE-B" = "192.168.11.3"; "ashci-c1-n1-STORAGE-C" = "192.168.12.3"; "ashci-c1-n1-STORAGE-D" = "192.168.13.3";
+                "ashci-c1-n2-MGMT" = "10.10.1.4";  "ashci-c1-n2-STORAGE-A" = "192.168.10.4"; "ashci-c1-n2-STORAGE-B" = "192.168.11.4"; "ashci-c1-n2-STORAGE-C" = "192.168.12.4"; "ashci-c1-n2-STORAGE-D" = "192.168.13.4";
+                "ashci-c1-n3-MGMT" = "10.10.1.5";  "ashci-c1-n3-STORAGE-A" = "192.168.10.5"; "ashci-c1-n3-STORAGE-B" = "192.168.11.5"; "ashci-c1-n3-STORAGE-C" = "192.168.12.5"; "ashci-c1-n3-STORAGE-D" = "192.168.13.5";
                }
     #>
     
-    <# IF SWITCHED - 4-Node - 2 x Site
-    $nodeips = @{"ashci-c1-n1-MGMT" = "10.44.83.3";  "ashci-c1-n1-STORAGE-A" = "10.44.82.3"; "ashci-c1-n1-STORAGE-B" = "10.44.82.131";
-                "ashci-c1-n2-MGMT" = "10.44.83.4";  "ashci-c1-n2-STORAGE-A" = "10.44.82.4"; "ashci-c1-n2-STORAGE-B" = "10.44.82.132";
-                "ashci-c1-n3-MGMT" = "10.44.83.5";  "ashci-c1-n3-STORAGE-A" = "10.44.82.5"; "ashci-c1-n3-STORAGE-B" = "10.44.82.133";
-                "ashci-c1-n4-MGMT" = "10.44.83.6";  "ashci-c1-n4-STORAGE-A" = "10.44.82.6"; "ashci-c1-n4-STORAGE-B" = "10.44.82.134";
-                "ashci-c2-n1-MGMT" = "10.44.83.9";  "ashci-c2-n1-STORAGE-A" = "10.44.82.9"; "ashci-c2-n1-STORAGE-B" = "10.44.82.137";
-                "ashci-c2-n2-MGMT" = "10.44.83.10"; "ashci-c2-n2-STORAGE-A" = "10.44.82.10"; "ashci-c2-n2-STORAGE-B" = "10.44.82.138";
-                "ashci-c2-n3-MGMT" = "10.44.83.11"; "ashci-c2-n3-STORAGE-A" = "10.44.82.11"; "ashci-c2-n3-STORAGE-B" = "10.44.82.139";
-                "ashci-c2-n4-MGMT" = "10.44.83.12"; "ashci-c2-n4-STORAGE-A" = "10.44.82.12"; "ashci-c2-n4-STORAGE-B" = "10.44.82.140"
+    <# IF SWITCHED - 4-Node
+    $nodeips = @{"ashci-c1-n1-MGMT" = "10.10.1.3";  "ashci-c1-n1-STORAGE-A" = "10.10.2.3"; "ashci-c1-n1-STORAGE-B" = "10.10.3.3";
+                "ashci-c1-n2-MGMT" = "10.10.1.4";  "ashci-c1-n2-STORAGE-A" = "10.10.2.4"; "ashci-c1-n2-STORAGE-B" = "10.10.3.4";
+                "ashci-c1-n3-MGMT" = "10.10.1.5";  "ashci-c1-n3-STORAGE-A" = "10.10.2.5"; "ashci-c1-n3-STORAGE-B" = "10.10.3.5";
+                "ashci-c1-n4-MGMT" = "10.10.1.6";  "ashci-c1-n4-STORAGE-A" = "10.10.2.6"; "ashci-c1-n4-STORAGE-B" = "10.10.3.6";
                }
     #>
 
