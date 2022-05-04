@@ -23,6 +23,7 @@ $SETAdapterNaming = "MGMT"
 $StorageAdapterNaming = "STORAGE"
 $vSwitchName = "vSwitch1"
 $Domain = "lab01.local"
+[int]$NetPrefix = "24"
 #endregion
 
 #region Set IPs
@@ -228,7 +229,7 @@ if($CheckRoleHV -eq $true)
     #7. Set IP Addressing
     WriteLog("Setting IP Addresses for Management")
     $interface = Get-NetAdapter | Where-Object { $_.name -eq "vEthernet (Management)" }
-    New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress $nodeips.Get_Item("$hostname-MGMT") -Prefixlength 24 -DefaultGateway $defaultgateway -Confirm:$false  | Out-Null
+    New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress $nodeips.Get_Item("$hostname-MGMT") -Prefixlength $NetPrefix -DefaultGateway $defaultgateway -Confirm:$false  | Out-Null
     Start-Sleep -s 5
     CheckError("Management IP, subnet mask and Gateway set")
     Set-DnsClientServerAddress -InterfaceIndex $interface.IfIndex -ServerAddresses $dnsservers -Confirm:$false
