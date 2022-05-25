@@ -290,7 +290,7 @@ if($CheckRoleHV -eq $true)
     }While([int]$number -eq 0)#end loop
 
     $StorageAdapter2 = $($Adapters[$number-1])
-    $StorageAdapter2Name = ($SETAdapter2).Name
+    $StorageAdapter2Name = ($StorageAdapter2).Name
     CheckError("Second Storage Adapter chosen is ""$StorageAdapter2Name""")
 
     #3. Rename Adapters
