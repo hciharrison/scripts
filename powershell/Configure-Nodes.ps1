@@ -207,27 +207,27 @@ if($CheckRoleHV -eq $true)
 
     #3. Rename Adapters
     WriteLog("Configuring SET Adapters and creating SET vSwitch")
-    Rename-NetAdapter -Name $SETAdapter1.Name -NewName "$SETAdapterNaming-A"
-    CheckError("SET Adapter ""$SETAdapter1Name"" renamed to $SETAdapterNaming-A")
-    Rename-NetAdapter -Name $SETAdapter2.Name -NewName "$SETAdapterNaming-B"
-    CheckError("SET Adapter ""$SETAdapter2Name"" renamed to $SETAdapterNaming-B")
+    Rename-NetAdapter -Name $SETAdapter1.Name -NewName "$SETAdapterNaming.1"
+    CheckError("SET Adapter ""$SETAdapter1Name"" renamed to $SETAdapterNaming.1")
+    Rename-NetAdapter -Name $SETAdapter2.Name -NewName "$SETAdapterNaming.2"
+    CheckError("SET Adapter ""$SETAdapter2Name"" renamed to $SETAdapterNaming.2")
   
     #4. Setting advanced settings
     # Set MGMT Jumbo MTU - QLogic supports "9014"
     WriteLog("Setting jumbo MTU on management interfaces")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming-A" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
-    CheckError("Jumbo MTU set successfully on $SETAdapterNaming-A")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming-B" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
-    CheckError("Jumbo MTU set successfully on $SETAdapterNaming-B")
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming.1" } | set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -RegistryValue 9014
+    CheckError("Jumbo MTU set successfully on $SETAdapterNaming.1")
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming.2" } | set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -RegistryValue 9014
+    CheckError("Jumbo MTU set successfully on $SETAdapterNaming.2")
    
     #5. Create vSwitch
     WriteLog("Creating vSwitch")
-    New-VMSwitch -Name $vSwitchName -NetAdapterName "MGMT-A","MGMT-B" -EnableEmbeddedTeaming $true -MinimumBandwidthMode Weight -Confirm:$false | Out-Null
+    New-VMSwitch -Name $vSwitchName -NetAdapterName "$SETAdapterNaming.1","$SETAdapterNaming.2" -EnableEmbeddedTeaming $true -MinimumBandwidthMode Weight -Confirm:$false | Out-Null
     CheckError("SET vSwitch created")
 
     #6. Rename ManagementOS VMNetAdapter NIC and set Jumbo MTU
     WriteLog("Renaming vEthernet NIC and setting Jumbo MTU")
-    Rename-VMNetworkAdapter -ManagementOS -Name vSwitch1 -NewName Management
+    Rename-VMNetworkAdapter -ManagementOS -Name $vSwitchName -NewName Management
     #Rename-NetAdapter -Name "vEthernet (vSwitch1)" -NewName "vEthernet (Management)"
     CheckError("ManagementOS Adapter renamed")
     Set-NetAdapterAdvancedProperty -Name "vEthernet (Management)" -DisplayName "Jumbo Packet" -DisplayValue "9014 Bytes"
@@ -291,37 +291,37 @@ if($CheckRoleHV -eq $true)
     }While([int]$number -eq 0)#end loop
 
     $StorageAdapter2 = $($Adapters[$number-1])
-    $StorageAdapter2Name = ($StorageAdapter2).Name
+    $StorageAdapter2Name = ($STorageAdapter2).Name
     CheckError("Second Storage Adapter chosen is ""$StorageAdapter2Name""")
 
     #3. Rename Adapters
     WriteLog("Configuring Storage Adapters")
-    Rename-NetAdapter -Name $StorageAdapter1.Name -NewName "$StorageAdapterNaming-A"
-    CheckError("SET Adapter ""$StorageAdapter1Name"" renamed to $StorageAdapterNaming-A")
-    Rename-NetAdapter -Name $StorageAdapter2.Name -NewName "$StorageAdapterNaming-B"
-    CheckError("SET Adapter ""$StorageAdapter2Name"" renamed to $StorageAdapterNaming-B")
+    Rename-NetAdapter -Name $StorageAdapter1.Name -NewName "$StorageAdapterNaming.1"
+    CheckError("SET Adapter ""$StorageAdapter1Name"" renamed to $StorageAdapterNaming.1")
+    Rename-NetAdapter -Name $StorageAdapter2.Name -NewName "$StorageAdapterNaming.2"
+    CheckError("SET Adapter ""$StorageAdapter2Name"" renamed to $StorageAdapterNaming.2")
   
     #4. Setting advanced settings
     # Set MGMT Jumbo MTU - QLogic supports "9014"
-    WriteLog("Setting jumbo MTU on Storage interfaces")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-A" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
-    CheckError("Jumbo MTU set successfully on $StorageAdapterNaming-A")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-B" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
-    CheckError("Jumbo MTU set successfully on $StorageAdapterNaming-B")
+    WriteLog("Setting jumbo MTU on management interfaces")
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming.1" } | set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -RegistryValue 9014
+    CheckError("Jumbo MTU set successfully on $StorageAdapterNaming.1")
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming.2" } | set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -RegistryValue 9014
+    CheckError("Jumbo MTU set successfully on $StorageAdapterNaming.2")
    
     #5. Set IP Addressing on first Storage Adapter
-    WriteLog("Setting IP Addresses for $StorageAdapterNaming-A")
-    $interface = Get-NetAdapter | Where-Object { $_.name -eq "$StorageAdapterNaming-A" }
+    WriteLog("Setting IP Addresses for $StorageAdapterNaming.1")
+    $interface = Get-NetAdapter | Where-Object { $_.name -eq "$StorageAdapterNaming.1" }
     New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress $nodeips.Get_Item("$hostname-STORAGE-A") -Prefixlength 24 -Confirm:$false | Out-Null
     Start-Sleep -s 5
-    CheckError("$StorageAdapterNaming-A IP and subnet mask set")
+    CheckError("$StorageAdapterNaming.1 IP and subnet mask set")
 
     #6. Set IP Addressing on first Storage Adapter
-    WriteLog("Setting IP Addresses for $StorageAdapterNaming-B")
-    $interface = Get-NetAdapter | Where-Object { $_.name -eq "$StorageAdapterNaming-B" }
+    WriteLog("Setting IP Addresses for $StorageAdapterNaming.2")
+    $interface = Get-NetAdapter | Where-Object { $_.name -eq "$StorageAdapterNaming.2" }
     New-NetIPAddress -InterfaceIndex $interface.ifIndex -IPAddress $nodeips.Get_Item("$hostname-STORAGE-B") -Prefixlength 24 -Confirm:$false  | Out-Null
     Start-Sleep -s 5
-    CheckError("$StorageAdapterNaming-B IP and subnet mask set")
+    CheckError("$StorageAdapterNaming.2 IP and subnet mask set")
 
     #7. Enable RDMA
     WriteLog("Enabling RDMA on Storage Adapters")
