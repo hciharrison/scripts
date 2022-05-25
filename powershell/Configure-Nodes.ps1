@@ -302,7 +302,7 @@ if($CheckRoleHV -eq $true)
   
     #4. Setting advanced settings
     # Set MGMT Jumbo MTU - QLogic supports "9014"
-    WriteLog("Setting jumbo MTU on management interfaces")
+    WriteLog("Setting jumbo MTU on Storage interfaces")
     Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-A" } | Set-NetAdapterAdvancedProperty -DisplayName "Jumbo Packet" -DisplayValue "9014 Bytes"
     CheckError("Jumbo MTU set successfully on $StorageAdapterNaming-A")
     Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-B" } | Set-NetAdapterAdvancedProperty -DisplayName "Jumbo Packet" -DisplayValue "9014 Bytes"
