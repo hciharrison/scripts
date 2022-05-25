@@ -13,6 +13,12 @@
     Requires Hyper-V Role to be installed for SET Team creation, script will prompt to install and reboot server if needed (then re-run script)
 #>
 
+<#
+### TO DO ####
+Variables for Adapter suffix
+   Then update the renaming commands with that variable
+Variable for Storage Adapter network prefix
+#>
 
 ######## EDIT SECTION ########
 #### ONLY SET THESE VARIABLES AS PER YOUR DEPLOYMENT #####
