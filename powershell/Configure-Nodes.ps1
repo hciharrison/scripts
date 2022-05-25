@@ -18,6 +18,7 @@
 Variables for Adapter suffix
    Then update the renaming commands with that variable
 Variable for Storage Adapter network prefix
+VLAN tag for Mgmt adapter
 #>
 
 ######## EDIT SECTION ########
