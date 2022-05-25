@@ -277,7 +277,7 @@ if($CheckRoleHV -eq $true)
     #Loop to ensure selection is made
     Do
     {
-        Write-Host "Choose 2nd SET Team Adapter:"
+        Write-Host "Choose 2nd Storage Adapter:"
         For ($i=0; $i -lt $Adapters.Count; $i++)  {
         Write-Host "$($i+1): $($Adapters[$i].Name) - $($Adapters[$i].InterfaceDescription) - $($Adapters[$i].MacAddress)"
     }
