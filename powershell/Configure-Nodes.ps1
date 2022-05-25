@@ -214,9 +214,9 @@ if($CheckRoleHV -eq $true)
     #4. Setting advanced settings
     # Set MGMT Jumbo MTU - QLogic supports "9014"
     WriteLog("Setting jumbo MTU on management interfaces")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming-A" } | Set-NetAdapterAdvancedProperty -DisplayName "Jumbo Packet" -DisplayValue "9014 Bytes"
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming-A" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
     CheckError("Jumbo MTU set successfully on $SETAdapterNaming-A")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming-B" } | Set-NetAdapterAdvancedProperty -DisplayName "Jumbo Packet" -DisplayValue "9014 Bytes"
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$SETAdapterNaming-B" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
     CheckError("Jumbo MTU set successfully on $SETAdapterNaming-B")
    
     #5. Create vSwitch
@@ -303,9 +303,9 @@ if($CheckRoleHV -eq $true)
     #4. Setting advanced settings
     # Set MGMT Jumbo MTU - QLogic supports "9014"
     WriteLog("Setting jumbo MTU on Storage interfaces")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-A" } | Set-NetAdapterAdvancedProperty -DisplayName "Jumbo Packet" -DisplayValue "9014 Bytes"
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-A" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
     CheckError("Jumbo MTU set successfully on $StorageAdapterNaming-A")
-    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-B" } | Set-NetAdapterAdvancedProperty -DisplayName "Jumbo Packet" -DisplayValue "9014 Bytes"
+    Get-NetAdapter * | Where-Object { $_.Name -eq "$StorageAdapterNaming-B" } | Set-NetAdapterAdvancedProperty -RegistryKeyword "*JumboPacket" -Registryvalue 9014
     CheckError("Jumbo MTU set successfully on $StorageAdapterNaming-B")
    
     #5. Set IP Addressing on first Storage Adapter
