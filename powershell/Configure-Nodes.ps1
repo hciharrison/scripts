@@ -20,6 +20,12 @@ Variables for Adapter suffix
 Variable for Storage Adapter network prefix
 VLAN tag for Mgmt adapter
 Disable RDMA on non-storage Adapters
+Storage
+   RoCE
+      Option for switched Roce with physical or virtual adapters, set QoS on nodes
+      If raw phsyical then set VLAN on adapter
+      If virtual then create Team and VMNetwork adapters
+      Option for switches, disable QoS on Nodes
 #>
 
 ######## EDIT SECTION ########
