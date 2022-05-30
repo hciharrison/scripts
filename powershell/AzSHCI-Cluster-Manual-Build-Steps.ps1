@@ -273,6 +273,8 @@ Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.N
 
 
 #Configuration for RoCE
+#If using Physical Adapters then need to set VLAN ID on host, and Switch ports must be trunk-mode carrying the VLAN
+#If using switchless, then disable QoS to default to Global Pause
 #Configure the DCB settings
 #SMB always use Priority 3 as best practice
 #Cluster HeartBeat uses Priority 7
