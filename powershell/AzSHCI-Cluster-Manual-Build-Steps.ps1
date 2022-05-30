@@ -273,6 +273,8 @@ Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.N
 
 
 #Configuration for RoCE
+#QoS and PFC required 802.1Q VLAN Tagging as the infroamtion required for it to work is in the Ethernet frame only when VLANs are in play
+#Run validate-dcb after RoCE configuration
 #If using Physical Adapters then need to set VLAN ID on host, and Switch ports must be trunk-mode carrying the VLAN
 #If using switchless, then disable QoS to default to Global Pause
 #Configure the DCB settings
