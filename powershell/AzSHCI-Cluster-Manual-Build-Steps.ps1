@@ -281,6 +281,10 @@ Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.N
 #SMB always use Priority 3 as best practice
 #Cluster HeartBeat uses Priority 7
 
+#Set VLAN on Physical Adapter exmaple:
+#Set-NetAdapterAdvancedProperty 'Storage-A' -RegistryKeyword VlanID -RegistryValue "711"
+
+
 #Create QoS Policies
 New-NetQosPolicy "SMB" -NetDirectPortMatchCondition 445 -PriorityValue8021Action 3
 New-NetQosPolicy "Cluster" -PriorityValue8021Action 7
