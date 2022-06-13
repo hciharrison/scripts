@@ -286,8 +286,9 @@ Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.N
 
 
 #Create QoS Policies
-New-NetQosPolicy "SMB" -NetDirectPortMatchCondition 445 -PriorityValue8021Action 3
+New-NetQosPolicy "SMBDirect" -NetDirectPortMatchCondition 445 -PriorityValue8021Action 3
 New-NetQosPolicy "Cluster" -PriorityValue8021Action 7
+New-NetQosPolicy  "Default" -Default  -PriorityValue8021Action 0
 
 # Turn on Flow Control for SMB and Cluster
 Enable-NetQosFlowControl -Priority 3,7
@@ -302,7 +303,7 @@ Set-NetQosDcbxSetting -Willing $false -Confirm:$false
 Enable-NetAdapterQos -InterfaceAlias "STORAGE-A","STORAGE-B"
 
 # Give SMB Direct a minimum bandwidth of 50%
-New-NetQosTrafficClass "SMB" -Priority 3 -BandwidthPercentage 50 -Algorithm ETS
+New-NetQosTrafficClass "SMBDirect" -Priority 3 -BandwidthPercentage 50 -Algorithm ETS
 
 #Give Cluser a minimum bandwith of 1%
 New-NetQosTrafficClass "Cluster" -Priority 7 -BandwidthPercentage 1 -Algorithm ETS
@@ -316,3 +317,11 @@ Get-NetAdapterQos -Name "STORAGE-A","STORAGE-B" | Enable-NetAdapterQos
 #RDMA should already be enabled above but check
 #Get-NetAdapterRDMA -Name "NIC1","NIC2" | Enable-NetAdapterRDMA
 Get-NetAdapterRdma
+
+#Check RDMA enabled
+#Get-SmbClientNetworkInterface | where RdmaCapable -EQ $true | ft FriendlyName
+
+#Disable qos on other adapters
+Get-NetAdapter | ? {$_.name -notlike 'pSMB*' } | Disable-NetAdapterQos
+Get-NetAdapterQos | ft name, Enabled
+
