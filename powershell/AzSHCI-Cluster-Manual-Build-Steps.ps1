@@ -325,3 +325,5 @@ Get-NetAdapterRdma
 Get-NetAdapter | ? {$_.name -notlike 'pSMB*' } | Disable-NetAdapterQos
 Get-NetAdapterQos | ft name, Enabled
 
+#Disable DNS reg for Storage NICs
+Set-DnsClient -InterfaceAlias "STORAGE*" -RegisterThisConnectionsAddress $false
