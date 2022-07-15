@@ -286,9 +286,10 @@ Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.N
 
 
 #Create QoS Policies
+New-NetQosPolicy "SMB" -SMB -ProrityValue8021Action 3
 New-NetQosPolicy "SMBDirect" -NetDirectPortMatchCondition 445 -PriorityValue8021Action 3
-New-NetQosPolicy "Cluster" -PriorityValue8021Action 7
-New-NetQosPolicy  "Default" -Default  -PriorityValue8021Action 0
+New-NetQosPolicy "Cluster" -Cluster -PriorityValue8021Action 7
+New-NetQosPolicy "Default" -Default  -PriorityValue8021Action 0
 
 # Turn on Flow Control for SMB and Cluster
 Enable-NetQosFlowControl -Priority 3,7
