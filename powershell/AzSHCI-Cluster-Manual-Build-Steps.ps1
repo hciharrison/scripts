@@ -281,6 +281,12 @@ Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.N
 #SMB always use Priority 3 as best practice
 #Cluster HeartBeat uses Priority 7
 
+#Set RDMA Protocol
+# 1 = iWarp, 3 = RoCE, 4 = RoCEv2
+Get-NetAdapterAdvancedProperty -Name pSMB* -RegistryKeyword "*NetworkDirectTechnology"
+#Set-NetAdapterAdvancedProperty -Name pSMB* -RegistryKeyword "*NetworkDirectTechnology" -RegistryValue 4
+
+
 #Set VLAN on Physical Adapter exmaple:
 #Set-NetAdapterAdvancedProperty 'Storage-A' -RegistryKeyword VlanID -RegistryValue "711"
 
