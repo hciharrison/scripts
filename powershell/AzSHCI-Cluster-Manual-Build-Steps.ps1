@@ -223,9 +223,11 @@ New-Cluster -Name azshci-cluster -Node node01,nod02 -NoStorage -StaticAddress "1
 #Set SMB bandswith limit - check its correct for the speed of you Adapaters
 Set-SmbBandwidthLimit -Category LiveMigration -BytesPerSecond 750MB
 #Set Max No Live Migrations
-Set-VMHost -MaximumVirtualMachineMigrations 2
+#Set-VMHost -MaximumVirtualMachineMigrations 2
+(Get-Cluster).MaximumParallelMigrations = 2
 #Set Live Migration to SMB
 Set-VMHost -VirtualMachineMigrationPerformanceOption SMB
+
 
 #Disable SMB Signing
 #Set-SmbClientConfiguration -RequireSecuritySignature $false -EnableSecuritySignature $false 
