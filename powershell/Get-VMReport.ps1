@@ -7,7 +7,7 @@
     PS C:\> .\Get-VMReport.ps1
     Adding VM Details for Cluster r630-c1 to file: C:\temp\vmreport_2022-10-12-1416.csv
 .NOTES
-    Need to manually set the clusters variable to one or more cluste rnames
+    Need to manually set the clusters variable to one or more cluster names
 #>
 
 
