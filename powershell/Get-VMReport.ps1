@@ -25,7 +25,7 @@ $datetime = (get-date -f yyyy-MM-dd-HHmm)
 $clusters = "r630-c1","r630-c2"
 
 
-#Start amin loop
+#Start main loop
 Foreach($Cluster in $Clusters){
     
     #Get VMs per cluster
