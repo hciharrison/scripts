@@ -22,7 +22,7 @@ $vms = $null
 $datetime = (get-date -f yyyy-MM-dd-HHmm)
 
 #Set Clusters
-$clusters = "r630-c1"
+$clusters = "r630-c1","r630-c2"
 
 
 #Start amin loop
