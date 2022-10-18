@@ -31,7 +31,8 @@
 
 
 #Install roles now as need the hyper-v role to create vSwitch
-Install-WindowsFeature -Name Hyper-V, Failover-Clustering, FS-Data-Deduplication, BitLocker, Data-Center-Bridging, RSAT-AD-PowerShell, Storage-Replica, FS-SMBBW -IncludeAllSubFeature -IncludeManagementTools –verbose
+#Install-WindowsFeature -Name Hyper-V, Failover-Clustering, NetworkATC, FS-Data-Deduplication, BitLocker, Data-Center-Bridging, RSAT-AD-PowerShell, Storage-Replica, FS-SMBBW -IncludeAllSubFeature -IncludeManagementTools –verbose
+Install-WindowsFeature -Name Hyper-V, Failover-Clustering, NetworkATC, Data-Center-Bridging, RSAT-AD-PowerShell, FS-SMBBW -IncludeAllSubFeature -IncludeManagementTools –verbose
 
 
 #Rename Adapters
