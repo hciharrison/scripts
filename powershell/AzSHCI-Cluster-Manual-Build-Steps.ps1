@@ -274,6 +274,9 @@ Enable-NetFirewallRule FPSSMBD-iWARP-In-TCP
 #2-Node Nested Cache to tolerate cache drive failure if node is down
 Get-StorageSubSystem Cluster* | Set-StorageHealthSetting -Name "System.Storage.NestedResiliency.DisableWriteCacheOnNodeDown.Enabled" -Value "True"
 
+#Add cloud witness
+Set-ClusterQuorum -CloudWitness -AccountName "<storage account name>" -AccessKey <access key>
+
 
 #Configuration for RoCE
 #QoS and PFC required 802.1Q VLAN Tagging as the infroamtion required for it to work is in the Ethernet frame only when VLANs are in play
