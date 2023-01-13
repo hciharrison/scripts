@@ -11,6 +11,7 @@
     Edit the Parameters and IP Addreses in the EDIT SECTION for your deployment, copy Script to Nodes via the Remote Access Card, run Script
     The IPs section has examples of configuring switched and switchless nodes, comment / uncomment as needed
     Requires Hyper-V Role to be installed for SET Team creation, script will prompt to install and reboot server if needed (then re-run script)
+    Users need to know which Adapters are for what role and identify them by MAC Address and default name
 #>
 
 <#
