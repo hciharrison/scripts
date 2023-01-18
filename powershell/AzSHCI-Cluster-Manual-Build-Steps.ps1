@@ -298,7 +298,7 @@ Get-NetAdapterAdvancedProperty -Name pSMB* -RegistryKeyword "*NetworkDirectTechn
 
 
 #Create QoS Policies
-New-NetQosPolicy "SMB" -SMB -ProrityValue8021Action 3
+#New-NetQosPolicy "SMB" -SMB -ProrityValue8021Action 3
 New-NetQosPolicy "SMBDirect" -NetDirectPortMatchCondition 445 -PriorityValue8021Action 3
 New-NetQosPolicy "Cluster" -Cluster -PriorityValue8021Action 7
 New-NetQosPolicy "Default" -Default  -PriorityValue8021Action 0
