@@ -11,7 +11,7 @@
 #>
 
 
-#Reset  values
+#Reset values
 $TotalDynamicHDDSpaceAllocated = 0
 $TotalHDDSpaceUsed = 0
 $report = @()
