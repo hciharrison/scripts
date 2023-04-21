@@ -33,7 +33,7 @@ Storage
 #### ONLY SET THESE VARIABLES AS PER YOUR DEPLOYMENT #####
 #region Script Parameters
 $pathToLogs = "Logs\nodeconfig\"
-$hostnames = "ASHA1","ASHA2","ASHA3","ASHA4","ASHA5"
+$hostnames = "node1","node2","node3","node4","node5"
 $SETAdapterNaming = "pSET"
 $StorageAdapterNaming = "pSMB"
 $vSwitchName = "vSWITCH01"
