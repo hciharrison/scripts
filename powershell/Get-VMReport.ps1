@@ -22,12 +22,12 @@ $vms = $null
 $datetime = (get-date -f yyyy-MM-dd-HHmm)
 
 #Set Clusters
-$clusters = "r630-c1","r630-c2"
+$clusters = "ashci-c01"
 
 
 #Start main loop
 Foreach($Cluster in $Clusters){
-    
+        
     #Get VMs per cluster
     $VMs = Get-ClusterGroup -Cluster $Cluster | where { $_.GroupType -like "VirtualMachine"} | Get-VM
 
@@ -37,9 +37,36 @@ Foreach($Cluster in $Clusters){
     #Loop VMs to get VHD stats
     foreach($VM in $VMs){
 
+    #Get firmware info like secure boot
+    $VMFirmware = Get-VMFirmware -ComputerName $vm.ComputerName -VMName $VM.Name 
+    
+    #Get IP and MAC Addresses (only returns first avbaiable so won't accomodate multiplae vnics)
+    $VMNetwork = Get-VM -ComputerName $vm.ComputerName $vm.name | Get-VMNetworkAdapter
+    $IPAddress = $VMNetwork.IPAddresses | Select-Object -First 1
+    $MACAddress = $VMNetwork.MacAddress | Select-Object -First 1
+
+        #Get IP Address via dns if not able to obtain via hypervisor
+        If(!$IPAddress){
+        $DNSIPAddress = Resolve-DnsName $vm.name -ErrorAction SilentlyContinue
+        $IPAddress = $DNSIPAddress.IPAddress | Select-Object -First 1
+        #Write-Host "Resolving DNS for" $vm.name -ForegroundColor Yellow
+        }
+        
+        <#Get IP Address via ping if not able to obtain via hypervisor
+        If(!$IPAddress){
+        $PingIPAddress = Test-Connection $vm.name -Count 2 -ErrorAction SilentlyContinue
+        $IPAddress = $PingIPAddress.IPV4Address.IPAddressToString | Select-Object -First 1
+        #Write-Host "pinging for" $vm.name -ForegroundColor Yellow
+        }#>
+
+    #Get Vlan Id (only returns first avbaiable so won't accomodate multiplae vnics)
+    $VMNetworkVlan = Get-VM -ComputerName $vm.ComputerName $vm.name | Get-VMNetworkAdapterVlan
+    $VlanId = $VMNetworkVlan.AccessVlanId | Select-Object -First 1
+
     $VHDs = Get-VHD -ComputerName $vm.ComputerName -VmId $vm.VmId
     $TotalDynamicHDDSpaceAllocated = 0
     $TotalHDDSpaceUsed = 0
+
         
         #Get stats for each VHD
         foreach ($vhd in $vhds) {
@@ -80,6 +107,10 @@ Foreach($Cluster in $Clusters){
     $report |  Add-Member -type NoteProperty -name "HostName" -value $vm.ComputerName
     $report |  Add-Member -type NoteProperty -name "Generation" -value $vm.Generation
     $report |  Add-Member -type NoteProperty -name "Version" -value $vm.Version
+    $report |  Add-Member -type NoteProperty -name "SecureBoot" -value $VMFirmware.SecureBoot
+    $report |  Add-Member -type NoteProperty -name "IPAddress" -value $IPAddress
+    $report |  Add-Member -type NoteProperty -name "MACAddress" -value $MACAddress
+    $report |  Add-Member -type NoteProperty -name "VlanId" -value $VlanId
     $report |  Add-Member -type NoteProperty -name "ReplicationState" -value $vm.ReplicationState
     $report |  Add-Member -type NoteProperty -name "Notes" -value  $vm.Notes
     $report |  Add-Member -type NoteProperty -name "CPUCount" -value $vm.ProcessorCount
