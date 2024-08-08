@@ -80,7 +80,7 @@ foreach($VMName in $VMNames) {
     [String[]]$VolNameList='UserStorage_1','UserStorage_2'
     #Volume name can be random or set to your choosing
     [String]$VolumeName = Get-Random -InputObject $VolNameList
-    #[String]$VolumeName = 'ASHA_SSD_V01'
+    #[String]$VolumeName = 'UserStorage_1'
 
     #Configure directory structure and move storage
     Write-Host "Creating directory structure in volume: $VolumeName"
