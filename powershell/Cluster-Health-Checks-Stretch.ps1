@@ -11,7 +11,7 @@ Check no ISOs mounted to VMs
 #>
 
 
-$Cluster = "eu-azhci-cl01"
+$Cluster = "clustername"
 
 #Function that checks health status for any resources that use the 'HealthStatus'  & 'FriendlyName' fields
 Function Check-Resources($Resources){
